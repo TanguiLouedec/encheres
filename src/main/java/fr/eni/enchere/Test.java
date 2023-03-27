@@ -30,6 +30,7 @@ public class Test extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		System.out.println("Ca marche, it's alive!!!");
+		System.out.println("salade tomate oignon");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
