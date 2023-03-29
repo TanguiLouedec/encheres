@@ -10,7 +10,7 @@ import fr.eni.enchere.bo.Utilisateurs;
 public class UserDAOJdbcImpl {
 	 	protected final String SELECT_ALL = "SELECT * FROM utilisateurs";
 	    protected final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur FROM utilisateurs WHERE no_utilisateur = ?";
-	    protected final String INSERT = "INSERT INTO utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur) VALUES ?,?,?,?,?,?,?,?,?,?";
+	    protected final String INSERT = "INSERT INTO utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 	    public void selectAll() {
 	    }
@@ -51,27 +51,27 @@ public class UserDAOJdbcImpl {
 	        try (Connection con = ConnectionProvider.getConnection()){
 	        	
 	            PreparedStatement psmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-	            psmt.setString(2, user.getPseudo());
-	            psmt.setString(3, user.getNom());
-	            psmt.setString(4, user.getPrenom());
-	            psmt.setString(5, user.getEmail());
-	            psmt.setString(6, user.getTelephone());
-	            psmt.setString(7, user.getRue());
-	            psmt.setString(8, user.getCodePostal());
-	            psmt.setString(9, user.getVille());
-	            psmt.setString(10, user.getMotDePasse());
-	            psmt.setInt(11, user.getAdministrateur());
+	            psmt.setString(1, user.getPseudo());
+	            psmt.setString(2, user.getNom());
+	            psmt.setString(3, user.getPrenom());
+	            psmt.setString(4, user.getEmail());
+	            psmt.setString(5, user.getTelephone());
+	            psmt.setString(6, user.getRue());
+	            psmt.setString(7, user.getCodePostal());
+	            psmt.setString(8, user.getVille());
+	            psmt.setString(9, user.getMotDePasse());
+	            psmt.setInt(10, user.getAdministrateur());
 	            psmt.executeUpdate();
-	    
-	            
+
 	            //récuppérer l'index auto généré par la base de donnée pour hydrater l'objet
 	            
 	            ResultSet rs = psmt.getGeneratedKeys();
-	            
+
 	            if (rs.next()) {
 	            	user.setNoUtilisateur(rs.getInt(1));
 	            }
-	           
+
+		        psmt.close();
 	        } catch (SQLException e) {
 	            throw new RuntimeException(e);
 	        }
