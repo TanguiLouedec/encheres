@@ -1,6 +1,6 @@
 package fr.eni.enchere.dal;
 
-public class ArticlesDAO {
+public class ArticlesDAOJdbcImpl {
 
 	
 	
