@@ -1,17 +1,18 @@
 package fr.eni.enchere.bo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Articles {
-	private Integer noArticle;
-	private String nomArticle;
-	private String description;
-	private LocalDate dateDebutEncheres;
-	private LocalDate dateFinEncheres;
-	private Integer prixInitial;
-	private Integer prixVente;
-	private Integer noUtilisateur;
-	private Integer noCategorie;
+	protected Integer noArticle;
+	protected String nomArticle;
+	protected String description;
+	protected LocalDate dateDebutEncheres;
+	protected LocalDate dateFinEncheres;
+	protected Integer prixInitial;
+	protected Integer prixVente;
+	protected Integer noUtilisateur;
+	protected Integer noCategorie;
 	
 	public Articles() {
 		super();
@@ -88,6 +89,7 @@ public class Articles {
 	public void setNoCategorie(Integer noCategorie) {
 		this.noCategorie = noCategorie;
 	}
+	
 
 
 	@Override
@@ -95,9 +97,17 @@ public class Articles {
 		return "Articles [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie="
-				+ noCategorie + "]";
+				+ noCategorie + "," + "]";
 	}
+
+
+
+	
+	
+	}
+
+
 
 	
 
-}
+
