@@ -1,7 +1,7 @@
 package fr.eni.enchere.bo;
 
 public class Administrateur extends Utilisateurs {
-	protected Integer idAdministrateur;
+	private	Integer idAdministrateur;
 	
 	public Administrateur() {
 		super();
