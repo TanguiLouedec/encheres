@@ -9,14 +9,14 @@ public class Utilisateurs extends Authentification {
 	protected String rue;
 	protected String codePostal;
 	protected String ville;
-	protected Boolean administrateur;
+	protected Byte administrateur;
 
 	public Utilisateurs() {
 		super();
 	}
 
-	public Utilisateurs(String pseudo, String motDePasse, Integer noUtilisateur, String nom, String prenom,
-			String email, String telephone, String rue, String codePostal, String ville, Boolean administrateur) {
+	public Utilisateurs(Integer noUtilisateur, String pseudo, String motDePasse, String nom, String prenom,
+			String email, String telephone, String rue, String codePostal, String ville, Byte administrateur) {
 		super(pseudo, motDePasse);
 		this.noUtilisateur = noUtilisateur;
 		this.nom = nom;
@@ -28,7 +28,21 @@ public class Utilisateurs extends Authentification {
 		this.ville = ville;
 		this.administrateur = administrateur;
 	}
-
+	
+	public Utilisateurs(String pseudo, String motDePasse, String nom, String prenom,
+			String email, String telephone, String rue, String codePostal, String ville, Byte administrateur) {
+		super(pseudo, motDePasse);
+		this.noUtilisateur = noUtilisateur;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.administrateur = administrateur;
+	}
+	
 	// Getters & Setters
 	public Integer getNoUtilisateur() {
 		return noUtilisateur;
@@ -94,11 +108,11 @@ public class Utilisateurs extends Authentification {
 		this.ville = ville;
 	}
 
-	public Boolean getAdministrateur() {
+	public Byte getAdministrateur() {
 		return administrateur;
 	}
 
-	public void setAdministrateur(Boolean administrateur) {
+	public void setAdministrateur(Byte administrateur) {
 		this.administrateur = administrateur;
 	}
 
