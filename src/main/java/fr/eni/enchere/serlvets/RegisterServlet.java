@@ -14,14 +14,14 @@ import fr.eni.enchere.dal.UserDAOJdbcImpl;
 /**
  * Servlet implementation class Register
  */
-@WebServlet("/Register")
-public class Register extends HttpServlet {
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +31,7 @@ public class Register extends HttpServlet {
 	 */
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 	}
 
 	/**
