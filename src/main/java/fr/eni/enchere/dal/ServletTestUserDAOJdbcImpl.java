@@ -35,7 +35,7 @@ public class ServletTestUserDAOJdbcImpl extends HttpServlet {
 			UserDAOJdbcImpl userDAOJdbcImpl = new UserDAOJdbcImpl();
 			//userDAOJdbcImpl.insert(userTest);
 			//response.getWriter().append("Insertion de l'user dont l'id est : ").append(userTest.getNoUtilisateur()+"");
-			response.getWriter().append("Test : ").append(userDAOJdbcImpl.selectByID(2).toString()+"");
+			response.getWriter().append("Test : ").append(userDAOJdbcImpl.selectByID(1).toString()+"");
 
 		} catch (Exception e) {
 			// TODO: handle exception
