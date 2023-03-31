@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class EncheresDAO implements CommonDao{
-	protected final String SELECT_ALL = "SELECT * FROM encheres";
-	protected final String SELECT_BY_ID = "SELECT * FROM encheres WHERE encheres = ?";
+public class CategoriesDAO {
+	protected final String SELECT_ALL = "SELECT * FROM categories";
+	protected final String SELECT_BY_ID = "SELECT * FROM categories WHERE categories = ?";
 	
 	public void selectall() {
 	}

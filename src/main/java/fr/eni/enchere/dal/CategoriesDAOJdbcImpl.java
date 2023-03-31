@@ -4,20 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
-import fr.eni.enchere.bo.Encheres;
-
+import fr.eni.enchere.bo.Categories;
 
 
-public class EncheresDAOJdbcImpl {
-	protected final String INSERT="INSERT INTO encheres(date_enchere, montant_enchere) VALUES(?,?);";
-	protected final String SELECT_ALL = "SELECT * FROM encheres";
-	protected final String SELECT_BY_ID = "SELECT date_enchere,montant_enchere,no_enchere FROM encheres WHERE no_enchere =?";
+public class CategoriesDAOJdbcImpl {
+	protected final String INSERT="INSERT INTO categories(libelle) VALUES(?);";
+	protected final String SELECT_ALL = "SELECT * FROM categories";
+	protected final String SELECT_BY_ID = "SELECT no_categorie,libelle FROM categories WHERE no_categorie =?";
 	
 	public void selectAll() {
     }
-	 public Encheres selectByID(int id) {
+	 public Categories selectByID(int id) {
 	        try (Connection con = ConnectionProvider.getConnection()){
 	            PreparedStatement psmt = con.prepareStatement(SELECT_BY_ID);
 	            psmt.setInt(1, id);
@@ -25,14 +23,13 @@ public class EncheresDAOJdbcImpl {
 	            ResultSet rs = psmt.executeQuery();
 	            
 	            if (rs.next()) {
-	            	Integer noEnchere = rs.getInt(1);
-	            	LocalDate dateEnchere = rs.getDate(2).toLocalDate();
-	            	Integer montantEnchere = rs.getInt(3);
+	            	Integer noCategorie = rs.getInt(1);
+	            	String libelle = rs.getString(2);
 	            	
 	            	
-	            	Encheres bid = new Encheres(dateEnchere,montantEnchere,noEnchere);
+	            	Categories categorie = new Categories(noCategorie,libelle);
 	            	
-	            	return bid;
+	            	return categorie;
 	            } else {
 		            return null;
 	            }
@@ -42,21 +39,20 @@ public class EncheresDAOJdbcImpl {
 	            }
         
 	        }
-	        public Encheres insert(Encheres bid) {
+	        public Categories insert(Categories categorie) {
 		        try (Connection con = ConnectionProvider.getConnection()){
 		        	
 		            PreparedStatement psmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-		            //psmt.setInt(1, bid.getNoEnchere());
-		            psmt.setDate(2, java.sql.Date.valueOf(bid.getDateEnchere()));
-		            psmt.setInt(3, bid.getMontantEnchere());
+		            
+		            psmt.setString(2, categorie.getLibelle());
 		            psmt.executeUpdate();
 
-		            //récuppérer l'index auto généré par la base de donnée pour hydrater l'objet
+		            
 		            
 		            ResultSet rs = psmt.getGeneratedKeys();
 
 		            if (rs.next()) {
-		            	bid.setNoEnchere(rs.getInt(1));
+		            	categorie.setNoCategorie(rs.getInt(1));
 		            }
 
 			        psmt.close();
@@ -65,5 +61,4 @@ public class EncheresDAOJdbcImpl {
 		        }
 				return null;
 	 }
-	 
-	 }
+}
