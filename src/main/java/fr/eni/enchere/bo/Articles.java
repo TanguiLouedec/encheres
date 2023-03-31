@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Articles {
-	protected Integer noArticle;
-	protected String nomArticle;
-	protected String description;
-	protected LocalDate dateDebutEncheres;
-	protected LocalDate dateFinEncheres;
-	protected Integer prixInitial;
-	protected Integer prixVente;
-	protected Integer noUtilisateur;
-	protected Integer noCategorie;
+	private Integer noArticle;
+	private String nomArticle;
+	private String description;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
+	private Integer prixInitial;
+	private Integer prixVente;
+	private Integer noUtilisateur;
+	private Integer noCategorie;
 	
 	public Articles() {
 		super();
