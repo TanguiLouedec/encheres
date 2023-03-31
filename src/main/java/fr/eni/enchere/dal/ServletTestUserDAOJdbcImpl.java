@@ -31,10 +31,11 @@ public class ServletTestUserDAOJdbcImpl extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			
-			Utilisateurs userTest = new Utilisateurs(1, "test", "test", "test", "test", "test", "test", "test", "test", "test", (byte) 1);
+			Utilisateurs userTest = new Utilisateurs( "test", "test", "test", "test", "test", "test", "test", "test", "test", (byte) 1);
 			UserDAOJdbcImpl userDAOJdbcImpl = new UserDAOJdbcImpl();
-			userDAOJdbcImpl.insert(userTest);
-			response.getWriter().append("Insertion de l'user dont l'id est : ").append(userTest.getNoUtilisateur()+"");
+			//userDAOJdbcImpl.insert(userTest);
+			//response.getWriter().append("Insertion de l'user dont l'id est : ").append(userTest.getNoUtilisateur()+"");
+			response.getWriter().append("Test : ").append(userDAOJdbcImpl.selectByID(2).toString()+"");
 
 		} catch (Exception e) {
 			// TODO: handle exception
