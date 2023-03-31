@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Encheres;
 import fr.eni.enchere.bo.Utilisateurs;
 
@@ -35,10 +36,17 @@ public class ServletTestEnchereDAOJdbcImpl extends HttpServlet {
 		try {
 			
 			Encheres testBid = new Encheres(LocalDate.of(2012,12,12),12,12121212);
+
+			testBid.setArticle(new Articles (1, "nom", "prenom ", LocalDate.of(2012,12,12), LocalDate.of(2012,12,12), 1,1,1, 1));
+			Byte bit = 1 ;
+			testBid.setUtilisateurs(new Utilisateurs (1, "test", "test","test","test","test","test","test","test","test", bit));
 			
 			EncheresDAOJdbcImpl EncheresDAOJdbcImpl = new EncheresDAOJdbcImpl();
 
 			Encheres enchere = EncheresDAOJdbcImpl.insert(testBid);
+
+			System.out.println(enchere);
+			System.out.println(testBid);
 			
 			String affichage = enchere.toString();
 			response.getWriter().append("Test : ").append(affichage);

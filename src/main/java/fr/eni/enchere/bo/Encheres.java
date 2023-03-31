@@ -6,7 +6,8 @@ public class Encheres {
 	private LocalDate dateEnchere;
 	private Integer montantEnchere;
 	private Integer noEnchere;
-	
+	private Articles article;
+	private Utilisateurs utilisateurs;
 	
 	
 	public Encheres(LocalDate dateEnchere, Integer montantEnchere, Integer noEnchere) {
@@ -40,5 +41,23 @@ public class Encheres {
 	public void setMontantEnchere(Integer montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
+
+	public Articles getArticle() {
+		return article;
+	}
+
+	public void setArticle(Articles article) {
+		this.article = article;
+	}
+
+	public Utilisateurs getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	public void setUtilisateurs(Utilisateurs utilisateurs) {
+		this.utilisateurs = utilisateurs;
+	}
+	
+	
 	
 }

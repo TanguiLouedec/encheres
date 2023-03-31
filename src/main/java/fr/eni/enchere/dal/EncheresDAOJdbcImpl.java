@@ -11,7 +11,7 @@ import fr.eni.enchere.bo.Encheres;
 
 
 public class EncheresDAOJdbcImpl {
-	protected final String INSERT="INSERT INTO encheres(date_enchere, montant_enchere) VALUES(?,?);";
+
 	protected final String SELECT_ALL = "SELECT * FROM encheres";
 	protected final String SELECT_BY_ID = "SELECT date_enchere,montant_enchere,no_enchere FROM encheres WHERE no_enchere =?";
 	
@@ -30,6 +30,12 @@ public class EncheresDAOJdbcImpl {
 	            	Integer montantEnchere = rs.getInt(3);
 	            	
 	            	
+	            	//TODO rÈcupÈrer l'utilisateur et l'article
+	            	
+	            	//rÈcupÈrzer l'id puis rÈcupÈer l'objet
+	            	
+	            	// ====> soit faire une jointure
+	            	
 	            	Encheres bid = new Encheres(dateEnchere,montantEnchere,noEnchere);
 	            	
 	            	return bid;
@@ -42,13 +48,20 @@ public class EncheresDAOJdbcImpl {
 	            }
         
 	        }
+
+
+			public final String INSERT="INSERT INTO encheres(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
+		
+		
 	        public Encheres insert(Encheres bid) {
 		        try (Connection con = ConnectionProvider.getConnection()){
 		        	
 		            PreparedStatement psmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 		            //psmt.setInt(1, bid.getNoEnchere());
-		            psmt.setDate(2, java.sql.Date.valueOf(bid.getDateEnchere()));
-		            psmt.setInt(3, bid.getMontantEnchere());
+		            psmt.setDate(1, java.sql.Date.valueOf(bid.getDateEnchere()));
+		            psmt.setInt(2, bid.getMontantEnchere());
+		            psmt.setInt(3, bid.getArticle().getNoArticle());
+		            psmt.setInt(4, bid.getUtilisateurs().getNoUtilisateur());
 		            psmt.executeUpdate();
 
 		            //r√©cupp√©rer l'index auto g√©n√©r√© par la base de donn√©e pour hydrater l'objet
@@ -63,7 +76,7 @@ public class EncheresDAOJdbcImpl {
 		        } catch (SQLException e) {
 		            throw new RuntimeException(e);
 		        }
-				return null;
-	 }
+				return bid;
+	        }
 	 
 	 }
