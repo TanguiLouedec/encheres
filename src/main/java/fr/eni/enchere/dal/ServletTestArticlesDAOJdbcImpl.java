@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bo.Articles;
+import fr.eni.enchere.bo.Categories;
+import fr.eni.enchere.bo.Utilisateurs;
 
 /**
  * Servlet implementation class ServletTestArticlesDAOJdbcImpl
@@ -36,18 +38,40 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 		try {
 
 			Articles articleTest = new Articles(1, "Doudou Napoléonien",
-					"Doudou maléfique du 18e siècle ayant appartenu à Napoléon et ayant survécu à Waterloo. Attention doudou susceptible, à manipuler avec précaution",
-					LocalDate.of(2023, 03, 31), LocalDate.of(2023, 04, 30), 666, 666, 1, 66);
+					"Doudou maléfique du 18e siècle ayant appartenu à Napoléon. Attention doudou susceptible, à manipuler avec précaution",
+					LocalDate.of(2023, 03, 31), LocalDate.of(2023, 04, 30), 666, 666, 3, 2);
+
+			articleTest.setCategories(new Categories(2,"test"));
+			Byte bit = 1;
+			articleTest.setUtilisateurs(new Utilisateurs (3, "test", "test","test","test","test","test","test","test","test", bit));
+			
 			ArticlesDAOJdbcImpl articlesDAOJdbcImpl = new ArticlesDAOJdbcImpl();
-			articlesDAOJdbcImpl.insert(articleTest);
-			response.getWriter().append("Insertion de l'article dont l'ID est : ")
-					.append(articleTest.getNoArticle() + ".");
+			
+			Articles article = ArticlesDAOJdbcImpl.insert(articleTest);
+			
+			System.out.println(articleTest);
+			System.out.println(article);
+			
+			String affichage = article.toString();
+			response.getWriter().append("Test : ").append(affichage);
+//			articlesDAOJdbcImpl.insert(articleTest);
+//			response.getWriter().append("Insertion de l'article dont l'id est : ").append(articleTest.getNoArticle()+"");
+//			response.getWriter().append("Test : ").append(articlesDAOJdbcImpl.selectByID(1).toString()+"");
+//			Articles article = articlesDAOJdbcImpl.insert(articleTest);
+//
+//			System.out.println(articleTest);
+//			System.out.println(article);
+//
+//			String affichage = article.toString();
+//			response.getWriter().append(affichage);
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			response.getWriter().append("Fail");
+			response.getWriter().append("Raté mais pas loin");
 			e.printStackTrace();
 		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	/**

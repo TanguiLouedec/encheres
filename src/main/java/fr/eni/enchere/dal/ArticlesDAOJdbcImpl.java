@@ -8,44 +8,18 @@ import java.time.LocalDate;
 
 import fr.eni.enchere.bo.Articles;
 
-public class ArticlesDAOJdbcImpl implements ArticlesDAO {
+public class ArticlesDAOJdbcImpl{
 
-	private static final String INSERT_ARTICLE = "insert into articles_vendus(no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) values(?,?,?,?,?,?,?,?,?)";
-	private static final String SELECT_ALL = "SELECT no_articles, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus";
-	private static final String SELECT_BY_ID = "SELECT no_articles, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus WHERE no_articles = ?";
+	protected  final String INSERT_ARTICLE = "insert into articles_vendus(no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) values(?,?,?,?,?,?,?,?,?)";
+	protected final String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus";
+	protected final String SELECT_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus WHERE no_articles = ?";
 //	
-
-	@Override
-	public void insert(Articles article) {
-
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
-
-			pstmt.setString(2, article.getNomArticle());
-			pstmt.setString(3, article.getDescription());
-			pstmt.setDate(4, java.sql.Date.valueOf(article.getDateDebutEncheres()));
-			pstmt.setDate(5, java.sql.Date.valueOf(article.getDateFinEncheres()));
-			pstmt.setInt(6, article.getPrixInitial());
-			pstmt.setInt(7, article.getPrixVente());
-			pstmt.setInt(8, article.getNoUtilisateur());
-			pstmt.setInt(9, article.getNoCategorie());
-			pstmt.executeUpdate();
-
-			ResultSet rs = pstmt.getGeneratedKeys();
-			if (rs.next()) {
-				article.setNoArticle(rs.getInt(1));
-			}
-			rs.close();
-			pstmt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+	public void selectAll() {
 	}
-
+	
 	public Articles selectByID(int id) {
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
+		try (Connection con = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = con.prepareStatement(SELECT_BY_ID);
 			pstmt.setInt(1, id);
 
 			ResultSet rs = pstmt.executeQuery();
@@ -72,26 +46,35 @@ public class ArticlesDAOJdbcImpl implements ArticlesDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public Articles insert(Articles article) {
 
-	public void selectAll() {
+		try (Connection con = ConnectionProvider.getConnection()) {
+			PreparedStatement psmt = con.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			psmt.setInt(1, article.getNoArticle());
+			psmt.setString(2, article.getNomArticle());
+			psmt.setString(3, article.getDescription());
+			psmt.setDate(4, java.sql.Date.valueOf(article.getDateDebutEncheres()));
+			psmt.setDate(5, java.sql.Date.valueOf(article.getDateFinEncheres()));
+			psmt.setInt(6, article.getPrixInitial());
+			psmt.setInt(7, article.getPrixVente());
+			psmt.setInt(8, article.getNoUtilisateur());
+			psmt.setInt(9, article.getNoCategorie());
+			psmt.executeUpdate();
 
+			ResultSet rs = psmt.getGeneratedKeys();
+			
+			if (rs.next()) {
+				article.setNoArticle(rs.getInt(1));
+			}
+			psmt.close();
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return article;
 	}
 
-	@Override
-	public void update(Articles article) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(Articles article) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void select(Articles article) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
 }
