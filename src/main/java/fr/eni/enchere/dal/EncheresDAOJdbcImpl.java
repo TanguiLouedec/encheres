@@ -13,7 +13,7 @@ import fr.eni.enchere.dal.tools.ConnectionProvider;
 
 public class EncheresDAOJdbcImpl implements IEnchereDAO{
 
-	protected final String SELECT_ALL = "SELECT * FROM encheres";
+	protected final String SELECT_ALL = "SELECT date_enchere,montant_enchere,no_enchere FROM encheres";
 	protected final String SELECT_BY_ID = "SELECT date_enchere,montant_enchere,no_enchere FROM encheres WHERE no_enchere =?";
 	
 	public void selectAll() {
