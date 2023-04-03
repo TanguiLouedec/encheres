@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div class="container">
-	        <form method="post" action="register">    
+	        <form method="post" action="./RegisterServlet">    
 	            <label for="pseudo">Pseudo : (3-16 caractères)</label>
 	            <input type="text" name="pseudo" id="pseudo" pattern="^\w{3,16}$" required>
 	
