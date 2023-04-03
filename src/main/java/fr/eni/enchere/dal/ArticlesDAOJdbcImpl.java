@@ -43,15 +43,15 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO{
 				Integer noCategorie = rs.getInt(9);
 				
 				//Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
-				//Utilisateurs utilisateur = new Utilisateurs();
-				//utilisateur.setNoUtilisateur(noUtilisateur);
+				Utilisateurs utilisateur = new Utilisateurs();
+				utilisateur.setNoUtilisateur(noUtilisateur);
 				
-				//Categories categorie = new Categories();
-				//categorie.setNoCategorie(noCategorie);
+				Categories categorie = new Categories();
+				categorie.setNoCategorie(noCategorie);
 				
-				//Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,utilisateur,categorie);
+				Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,utilisateur,categorie);
 				
-				//return article;
+				return article;
 			} else {
 				return null;
 			}
@@ -59,7 +59,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO{
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return null;
+
 	}
 	
 	public void insert(Articles article) {
