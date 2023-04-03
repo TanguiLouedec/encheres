@@ -1,5 +1,7 @@
 package fr.eni.enchere.bo;
 
+import java.util.Objects;
+
 public class Utilisateurs extends Authentification {
 	protected Integer noUtilisateur;
 	protected String nom;
@@ -117,6 +119,27 @@ public class Utilisateurs extends Authentification {
 		return "Utilisateurs [noUtilisateur=" + noUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", email="
 				+ email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal=" + codePostal + ", ville="
 				+ ville + ", administrateur=" + administrateur + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(administrateur, codePostal, email, noUtilisateur, nom, prenom, rue, telephone, ville);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utilisateurs other = (Utilisateurs) obj;
+		return administrateur == other.administrateur && Objects.equals(codePostal, other.codePostal)
+				&& Objects.equals(email, other.email) && Objects.equals(noUtilisateur, other.noUtilisateur)
+				&& Objects.equals(nom, other.nom) && Objects.equals(prenom, other.prenom)
+				&& Objects.equals(rue, other.rue) && Objects.equals(telephone, other.telephone)
+				&& Objects.equals(ville, other.ville);
 	}
 
 }
