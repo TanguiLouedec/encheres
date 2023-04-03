@@ -36,9 +36,9 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO{
 				Integer noUtilisateur = rs.getInt(8);
 				Integer noCategorie = rs.getInt(9);
 				
-				/*Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,noUtilisateur,noCategorie);
+				//Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,noUtilisateur,noCategorie);
 				
-				return article;*/
+				//return article;*/
 				return article;
 			} else {
 				return null;
