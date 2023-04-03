@@ -8,14 +8,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Articles;
+import fr.eni.enchere.bo.Categories;
+import fr.eni.enchere.bo.Utilisateurs;
 import fr.eni.enchere.dal.tools.ConnectionProvider;
 
 public class ArticlesDAOJdbcImpl implements IArticleDAO{
 
 	protected  final String INSERT_ARTICLE = "insert into articles_vendus(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) values(?,?,?,?,?,?,?,?)";
 	protected final String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus";
-	protected final String SELECT_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus WHERE no_articles = ?";
-
+	//protected final String SELECT_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus WHERE no_articles = ?";
+	protected final String SELECT_BY_ID = "SELECT a.noArticle, a.nomArticle, a.description, a.dateDebutEncheres, a.dateFinEncheres, a.prixInitial, a.prixVente, u.noUtilisateur, c.noCategorie " +
+			 "FROM Articles a " +
+			 "JOIN Utilisateurs u ON a.noUtilisateur = u.noUtilisateur " +
+			 "JOIN Categories c ON a.noCategorie = c.noCategorie " +
+			 "WHERE a.noArticle = ?";
 	
 	public Articles selectByID(int id) {
 		try (Connection con = ConnectionProvider.getConnection()) {
@@ -36,10 +42,16 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO{
 				Integer noUtilisateur = rs.getInt(8);
 				Integer noCategorie = rs.getInt(9);
 				
-				/*Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,noUtilisateur,noCategorie);
+				//Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
+				//Utilisateurs utilisateur = new Utilisateurs();
+				//utilisateur.setNoUtilisateur(noUtilisateur);
 				
-				return article;*/
-				return article;
+				//Categories categorie = new Categories();
+				//categorie.setNoCategorie(noCategorie);
+				
+				//Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,utilisateur,categorie);
+				
+				//return article;
 			} else {
 				return null;
 			}
@@ -47,6 +59,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO{
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+		return null;
 	}
 	
 	public void insert(Articles article) {

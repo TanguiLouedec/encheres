@@ -46,13 +46,14 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 //			response.getWriter().append("Insertion de l'article dont l'id est : ").append(articleTest.getNoArticle()+"");
 //			response.getWriter().append("Test : ").append(articleDAOJdbcImpl.selectByID(1).toString()+"");
 			//fin Test Methode 01
-
 			Byte bit = 1;
+			Utilisateurs user = new Utilisateurs (1, "test", "test","test","test","test","test","test","test","test", bit);
+			Categories cat = new Categories (2,"test");
 			//test Methode 02
-			Articles articleTest = new Articles(1,"test","test",LocalDate.of(2023, 03, 31), 
+			Articles articleTest = new Articles(1,"testa","test",LocalDate.of(2023, 03, 31), 
 					LocalDate.of(2023, 04, 30), 3, 3, 
-					new Utilisateurs (1, "test", "test","test","test","test","test","test","test","test", bit), 
-					new Categories (1,"test"));
+					user, cat
+					);
 		
 			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl(); 
 			
