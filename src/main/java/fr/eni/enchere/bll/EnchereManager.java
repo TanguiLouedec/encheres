@@ -11,7 +11,7 @@ public class EnchereManager implements IEnchereManager{
 	}
 
 	@Override
-	public void inesrt(Encheres enchere) {
+	public void insert(Encheres enchere) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -4,5 +4,5 @@ import fr.eni.enchere.bo.Encheres;
 
 public interface IEnchereManager {
 	public Encheres selectByID(int id);
-	public void inesrt(Encheres enchere);
+	public void insert(Encheres enchere);
 }
