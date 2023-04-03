@@ -2,6 +2,8 @@ package fr.eni.enchere.serlvets;
 
 import java.io.IOException;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,10 @@ public class RegisterServlet extends HttpServlet {
 	 */
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
+		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -39,7 +44,6 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -49,14 +53,14 @@ public class RegisterServlet extends HttpServlet {
 		String cp = request.getParameter("cp");
 		String ville = request.getParameter("ville");
 		String mdp = request.getParameter("mdp");
-		String mdpCofirm = request.getParameter("mdpConfirm");
+		String mdpConfirm = request.getParameter("mdpConfirm");
 		
 		Utilisateurs user = new Utilisateurs(pseudo, nom, prenom, email, telephone, rue, cp, ville, mdp, (byte) 0);
 		
 		UserDAOJdbcImpl daoImpl = new UserDAOJdbcImpl();
 		daoImpl.insert(user);
 		
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
