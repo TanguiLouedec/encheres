@@ -10,7 +10,7 @@ import fr.eni.enchere.bo.Categories;
 
 public class CategoriesDAOJdbcImpl {
 	protected final String INSERT="INSERT INTO categories(libelle) VALUES(?);";
-	protected final String SELECT_ALL = "SELECT * FROM categories";
+	protected final String SELECT_ALL = "SELECT no_categorie,libelle FROM categories";
 	protected final String SELECT_BY_ID = "SELECT no_categorie,libelle FROM categories WHERE no_categorie =?";
 	
 	public void selectAll() {
@@ -44,7 +44,7 @@ public class CategoriesDAOJdbcImpl {
 		        	
 		            PreparedStatement psmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 		            
-		            psmt.setString(2, categorie.getLibelle());
+		            psmt.setString(1, categorie.getLibelle());
 		            psmt.executeUpdate();
 
 		            

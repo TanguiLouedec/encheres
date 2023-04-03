@@ -3,6 +3,7 @@ package fr.eni.enchere.bo;
 public class Categories {
 	private Integer noCategorie;
 	private String libelle;
+	private Articles article;
 	
 	
 	public Categories(Integer noCategorie, String libelle) {
@@ -10,6 +11,15 @@ public class Categories {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
+	
+	public Articles getArticle() {
+		return article;
+	}
+
+	public void setArticle(Articles article) {
+		this.article = article;
+	}
+
 	public Integer getNoCategorie() {
 		return noCategorie;
 	}
