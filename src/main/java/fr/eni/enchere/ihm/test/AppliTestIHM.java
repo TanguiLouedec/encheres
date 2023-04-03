@@ -1,4 +1,4 @@
-package fr.eni.enchere.ihm;
+package fr.eni.enchere.ihm.test;
 
 public class AppliTestIHM {
 

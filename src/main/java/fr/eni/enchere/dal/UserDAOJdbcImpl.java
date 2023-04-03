@@ -6,14 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.eni.enchere.bo.Utilisateurs;
+import fr.eni.enchere.dal.tools.ConnectionProvider;
 
-public class UserDAOJdbcImpl {
+public class UserDAOJdbcImpl implements IUserDAO{
 	 	protected final String SELECT_ALL = "SELECT * FROM utilisateurs";
 	    protected final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur FROM utilisateurs WHERE no_utilisateur = ?";
 	    protected final String INSERT = "INSERT INTO utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?)";
-
-	    public void selectAll() {
-	    }
 
 	    public Utilisateurs selectByID(int id) {
 	        try (Connection con = ConnectionProvider.getConnection()){

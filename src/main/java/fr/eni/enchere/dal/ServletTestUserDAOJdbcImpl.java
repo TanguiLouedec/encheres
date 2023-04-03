@@ -12,7 +12,7 @@ import fr.eni.enchere.bo.Utilisateurs;
 /**
  * Servlet implementation class testDAO
  */
-@WebServlet("/testDAO")
+@WebServlet("/testDAOtemp")
 public class ServletTestUserDAOJdbcImpl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import fr.eni.enchere.bo.Encheres;
+import fr.eni.enchere.dal.tools.ConnectionProvider;
 
 
 
-public class EncheresDAOJdbcImpl {
+public class EncheresDAOJdbcImpl implements IEnchereDAO{
 
 	protected final String SELECT_ALL = "SELECT * FROM encheres";
 	protected final String SELECT_BY_ID = "SELECT date_enchere,montant_enchere,no_enchere FROM encheres WHERE no_enchere =?";
@@ -30,9 +31,9 @@ public class EncheresDAOJdbcImpl {
 	            	Integer montantEnchere = rs.getInt(3);
 	            	
 	            	
-	            	//TODO récupérer l'utilisateur et l'article
+	            	//TODO rï¿½cupï¿½rer l'utilisateur et l'article
 	            	
-	            	//récupérzer l'id puis récupéer l'objet
+	            	//rï¿½cupï¿½rzer l'id puis rï¿½cupï¿½er l'objet
 	            	
 	            	// ====> soit faire une jointure
 	            	
@@ -53,7 +54,7 @@ public class EncheresDAOJdbcImpl {
 			public final String INSERT="INSERT INTO encheres(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
 		
 		
-	        public Encheres insert(Encheres bid) {
+	        public void insert(Encheres bid) {
 		        try (Connection con = ConnectionProvider.getConnection()){
 		        	
 		            PreparedStatement psmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -76,7 +77,6 @@ public class EncheresDAOJdbcImpl {
 		        } catch (SQLException e) {
 		            throw new RuntimeException(e);
 		        }
-				return bid;
 	        }
 	 
 	 }

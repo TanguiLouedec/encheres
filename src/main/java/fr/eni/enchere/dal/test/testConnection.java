@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.test;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.enchere.dal.tools.ConnectionProvider;
 
 /**
  * Servlet implementation class testConnection

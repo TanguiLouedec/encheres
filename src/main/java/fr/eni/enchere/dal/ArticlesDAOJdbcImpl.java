@@ -5,17 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Articles;
+import fr.eni.enchere.dal.tools.ConnectionProvider;
 
-public class ArticlesDAOJdbcImpl{
+public class ArticlesDAOJdbcImpl implements IArticleDAO{
 
-	protected  final String INSERT_ARTICLE = "insert into articles_vendus(no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) values(?,?,?,?,?,?,?,?,?)";
+	protected  final String INSERT_ARTICLE = "insert into articles_vendus(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) values(?,?,?,?,?,?,?,?)";
 	protected final String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus";
 	protected final String SELECT_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus WHERE no_articles = ?";
-//	
-	public void selectAll() {
-	}
+
 	
 	public Articles selectByID(int id) {
 		try (Connection con = ConnectionProvider.getConnection()) {
@@ -32,11 +32,13 @@ public class ArticlesDAOJdbcImpl{
 				LocalDate dateFinEncheres = rs.getDate(5).toLocalDate();
 				Integer prixInitial = rs.getInt(6);
 				Integer prixVente = rs.getInt(7);
+				
 				Integer noUtilisateur = rs.getInt(8);
 				Integer noCategorie = rs.getInt(9);
 				
-				Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,noUtilisateur,noCategorie);
+				/*Articles article = new Articles(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,prixInitial,prixVente,noUtilisateur,noCategorie);
 				
+				return article;*/
 				return article;
 			} else {
 				return null;
@@ -47,22 +49,22 @@ public class ArticlesDAOJdbcImpl{
 		}
 	}
 	
-	public Articles insert(Articles article) {
+	public void insert(Articles article) {
 
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement psmt = con.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			psmt.setInt(1, article.getNoArticle());
-			psmt.setString(2, article.getNomArticle());
-			psmt.setString(3, article.getDescription());
-			psmt.setDate(4, java.sql.Date.valueOf(article.getDateDebutEncheres()));
-			psmt.setDate(5, java.sql.Date.valueOf(article.getDateFinEncheres()));
-			psmt.setInt(6, article.getPrixInitial());
-			psmt.setInt(7, article.getPrixVente());
-			psmt.setInt(8, article.getNoUtilisateur());
-			psmt.setInt(9, article.getNoCategorie());
+			psmt.setString(1, article.getNomArticle());
+			psmt.setString(2, article.getDescription());
+			psmt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
+			psmt.setDate(4, java.sql.Date.valueOf(article.getDateFinEncheres()));
+			psmt.setInt(5, article.getPrixInitial());
+			psmt.setInt(6, article.getPrixVente());
+			psmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
+			psmt.setInt(8, article.getCategorie().getNoCategorie());
 			psmt.executeUpdate();
 
+				//Recuperer l'index auto généré par la base de données pour hydrater l'objet
 			ResultSet rs = psmt.getGeneratedKeys();
 			
 			if (rs.next()) {
@@ -71,10 +73,19 @@ public class ArticlesDAOJdbcImpl{
 			psmt.close();
 			
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
 		}
-		return article;
 	}
+
+	@Override
+	public ArrayList<Articles> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+		
+	
 
 }

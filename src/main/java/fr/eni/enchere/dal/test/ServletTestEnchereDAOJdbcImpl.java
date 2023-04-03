@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.test;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Encheres;
 import fr.eni.enchere.bo.Utilisateurs;
+import fr.eni.enchere.dal.EncheresDAOJdbcImpl;
 
 /**
  * Servlet implementation class ServletTestEnchereDAOJdbcImpl
@@ -43,13 +44,13 @@ public class ServletTestEnchereDAOJdbcImpl extends HttpServlet {
 			
 			EncheresDAOJdbcImpl EncheresDAOJdbcImpl = new EncheresDAOJdbcImpl();
 
-			Encheres enchere = EncheresDAOJdbcImpl.insert(testBid);
+			//Encheres enchere = EncheresDAOJdbcImpl.insert(testBid);
 
-			System.out.println(enchere);
-			System.out.println(testBid);
+			//System.out.println(enchere);
+			//System.out.println(testBid);
 			
-			String affichage = enchere.toString();
-			response.getWriter().append("Test : ").append(affichage);
+			//String affichage = enchere.toString();
+			//response.getWriter().append("Test : ").append(affichage);
 
 		} catch (Exception e) {
 			// TODO: handle exception
