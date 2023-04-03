@@ -18,6 +18,8 @@ public class Articles {
 		super();
 	}
 
+
+
 	public Articles(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, Integer prixInitial, Integer prixVente, Utilisateurs utilisateur,
 			Categories categorie) {
@@ -32,6 +34,8 @@ public class Articles {
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 	}
+
+
 
 	public Integer getNoArticle() {
 		return noArticle;

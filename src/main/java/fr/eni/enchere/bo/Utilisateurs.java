@@ -13,6 +13,10 @@ public class Utilisateurs extends Authentification {
 	protected String ville;
 	protected boolean administrateur;
 
+	public Utilisateurs() {
+		super();
+	}
+
 	public Utilisateurs(Integer noUtilisateur, String pseudo, String motDePasse, String nom, String prenom,
 			String email, String telephone, String rue, String codePostal, String ville, boolean administrateur) {
 		super(pseudo, motDePasse);
