@@ -5,7 +5,16 @@ public class Categories {
 	private String libelle;
 	private Articles article;
 	
+
+	public Categories() {
+		super();
+	}
 	
+	public Categories( String libelle) {
+		super();
+		this.libelle = libelle;
+	}
+
 	public Categories(Integer noCategorie, String libelle) {
 		super();
 		this.noCategorie = noCategorie;
