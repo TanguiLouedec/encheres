@@ -1,7 +1,9 @@
-package fr.eni.enchere.bo;
+package fr.eni.enchere.bo.test;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import fr.eni.enchere.bo.Articles;
 
 public class ArticlesTestBO extends Articles {
 

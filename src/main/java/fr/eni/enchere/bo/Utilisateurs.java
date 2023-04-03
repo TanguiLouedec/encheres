@@ -9,10 +9,10 @@ public class Utilisateurs extends Authentification {
 	protected String rue;
 	protected String codePostal;
 	protected String ville;
-	protected Byte administrateur;
+	protected boolean administrateur;
 
 	public Utilisateurs(Integer noUtilisateur, String pseudo, String motDePasse, String nom, String prenom,
-			String email, String telephone, String rue, String codePostal, String ville, Byte administrateur) {
+			String email, String telephone, String rue, String codePostal, String ville, boolean administrateur) {
 		super(pseudo, motDePasse);
 		this.noUtilisateur = noUtilisateur;
 		this.nom = nom;
@@ -26,7 +26,7 @@ public class Utilisateurs extends Authentification {
 	}
 	
 	public Utilisateurs(String pseudo, String motDePasse, String nom, String prenom,
-			String email, String telephone, String rue, String codePostal, String ville, Byte administrateur) {
+			String email, String telephone, String rue, String codePostal, String ville, boolean administrateur) {
 		super(pseudo, motDePasse);
 		this.noUtilisateur = noUtilisateur;
 		this.nom = nom;
@@ -104,11 +104,11 @@ public class Utilisateurs extends Authentification {
 		this.ville = ville;
 	}
 
-	public Byte getAdministrateur() {
+	public boolean getAdministrateur() {
 		return administrateur;
 	}
 
-	public void setAdministrateur(Byte administrateur) {
+	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
 

@@ -2,7 +2,6 @@ package fr.eni.enchere.serlvets;
 
 import java.io.IOException;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import fr.eni.enchere.dal.UserDAOJdbcImpl;
  */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -55,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		String mdpConfirm = request.getParameter("mdpConfirm");
 		
-		Utilisateurs user = new Utilisateurs(pseudo, nom, prenom, email, telephone, rue, cp, ville, mdp, (byte) 0);
+		Utilisateurs user = new Utilisateurs(pseudo, nom, prenom, email, telephone, rue, cp, ville, mdp, false);
 		
 		UserDAOJdbcImpl daoImpl = new UserDAOJdbcImpl();
 		daoImpl.insert(user);
