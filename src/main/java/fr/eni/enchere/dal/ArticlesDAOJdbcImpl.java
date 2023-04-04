@@ -56,6 +56,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 	}
 
 	public Articles selectByID(int id) {
+		Articles article=null;
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement(SELECT_BY_ID);
 			pstmt.setInt(1, id);
@@ -84,17 +85,15 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 				Categories categorie = new Categories();
 				categorie.setNoCategorie(noCategorie);
 
-				Articles article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
+				article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
 						prixInitial, prixVente, utilisateur, categorie);
 
-				return article;
-			} else {
-				return null;
+			
 			}
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
+		}return article;
 
 	}
 

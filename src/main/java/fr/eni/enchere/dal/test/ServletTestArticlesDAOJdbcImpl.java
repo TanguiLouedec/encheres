@@ -46,18 +46,26 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 					"test", bit);
 			Categories cat = new Categories(2, "test");
 
-			// test Methode 02
 			Articles articleTest = new Articles(1, "test1", "test", LocalDate.of(2023, 03, 31),
 					LocalDate.of(2023, 04, 30), 3, 3, user, cat);
 			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
 			articlesDAO.insert(articleTest);
 
+			
 			// Test Select All
+			
 			ArticlesDAOJdbcImpl articlesDAOListe = new ArticlesDAOJdbcImpl();
 			List<Articles> liste = articlesDAOListe.selectAll();
 
 			for (Articles article : liste) {
 			    response.getWriter().append(article.toString() + "\n");}
+			
+			// Test Select ByID
+			
+//	        Articles selectedArticle = articleDAO.selectByID(article.getNoArticle());
+//	        System.out.println("Selected article:");
+//	        System.out.println(selectedArticle.toString());
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			response.getWriter().append("Fail");
