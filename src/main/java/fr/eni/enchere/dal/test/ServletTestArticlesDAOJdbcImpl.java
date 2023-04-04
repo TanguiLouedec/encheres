@@ -39,7 +39,7 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 
-			//Test Insertion Article
+			//Test insertion Article
 
 			Boolean bit = true;
 			Utilisateurs user = new Utilisateurs(1, "test", "test", "test", "test", "test", "test", "test", "test",
