@@ -6,11 +6,9 @@ public abstract class Authentification {
 
 	// Constructeurs
 	public Authentification() {
-		super();
 	}
 
 	public Authentification(String pseudo, String motDePasse) {
-		super();
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 	}

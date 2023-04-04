@@ -48,7 +48,7 @@ public class UserDAOJdbcImpl implements IUserDAO{
 	        try (Connection con = ConnectionProvider.getConnection()){
 	        	
 	            PreparedStatement psmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-	            psmt.setString(1, user.getPseudo());
+	            psmt.setString(1, user.getPseudo()); 
 	            psmt.setString(2, user.getNom());
 	            psmt.setString(3, user.getPrenom());
 	            psmt.setString(4, user.getEmail());
