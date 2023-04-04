@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Categories;
+import fr.eni.enchere.bo.Utilisateurs;
 import fr.eni.enchere.dal.CategoriesDAOJdbcImpl;
 
 /**
@@ -36,12 +37,12 @@ public class ServletTestCategorieDAOJdbcImpl extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-
+			boolean admin = true;
 			Categories testCategories = new Categories("drogue");
 			testCategories.setNoCategorie(1);
-
+			Utilisateurs user = new Utilisateurs(1,"kebab","simply","thebest","simplythebest@thegoat.com","6969696969","legends avenue","00001","Rochefourchat","saladetomateoignon",admin);
 			testCategories.setArticle(new Articles(1, "methamphetamine", "blue meth", LocalDate.of(2012, 12, 12),
-					LocalDate.of(2012, 12, 12), 1, 1, 1, 1));
+					LocalDate.of(2012, 12, 12), 1, 1,user, testCategories));
 
 			CategoriesDAOJdbcImpl CategoriesDAOJdbcImpl = new CategoriesDAOJdbcImpl();
 
