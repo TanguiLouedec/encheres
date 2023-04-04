@@ -37,6 +37,9 @@ public class IndexServlet extends HttpServlet {
 		
 		try {
 			articleList = ArticleManagerSingleton.getInstance().selectAll();
+			for (Articles articles : articleList) {
+				System.out.println(articles);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

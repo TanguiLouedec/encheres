@@ -13,7 +13,7 @@
 	<title>Enchere</title>
 </head>
 <body>
-	<a href="./profile.jsp">
+	<a href="">
 		<button>
 			Profil
 		</button>

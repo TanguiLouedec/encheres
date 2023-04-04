@@ -2,6 +2,7 @@ package fr.eni.enchere.dal.test;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -61,8 +62,15 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
 
 			articlesDAO.insert(articleTest);
-
 			
+			
+			ArrayList<Articles> articleList = new ArrayList<Articles>();
+
+			articleList = articlesDAO.selectAll();
+			
+			for (Articles articles : articleList) {
+				System.out.println(articles);
+			}
 			//Test Select All
 //			ArticlesDAOJdbcImpl articlesDAO1 = new ArticlesDAOJdbcImpl();
 //			List<Articles> articlesList = articlesDAO1.selectAll();
