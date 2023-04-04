@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/register-style.css">
+		<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+		
 		<meta charset="UTF-8">
 		<title>Register</title>
 	</head>
@@ -40,7 +41,7 @@
 	            <label for="mdpConfirm">Confirmez le mot de passe :</label>
 	            <input type="password" name="mdpConfirm" id="mdpConfirm" required>
 	
-	            <input type="submit" value="Submit" id="submit">
+	            <input type="submit" value="S'inscrire" id="submit">
 	        </form>    
 	    </div>
 	</body>

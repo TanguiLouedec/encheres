@@ -3,23 +3,24 @@ package fr.eni.enchere.bo;
 import java.util.Objects;
 
 public class Utilisateurs extends Authentification {
-	protected Integer noUtilisateur;
-	protected String nom;
-	protected String prenom;
-	protected String email;
-	protected String telephone;
-	protected String rue;
-	protected String codePostal;
-	protected String ville;
-	protected boolean administrateur;
+	private Integer noUtilisateur;
+	private String pseudo;
+	private String nom;
+	private String prenom;
+	private String email;
+	private String telephone;
+	private String rue;
+	private String codePostal;
+	private String ville;
+	private boolean administrateur;
 
 	public Utilisateurs() {
 		super();
 	}
 
-	public Utilisateurs(Integer noUtilisateur, String pseudo, String motDePasse, String nom, String prenom,
-			String email, String telephone, String rue, String codePostal, String ville, boolean administrateur) {
-		super(pseudo, motDePasse);
+	public Utilisateurs(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, boolean administrateur) {
+		this.motDePasse = motDePasse;
+		this.pseudo = pseudo;
 		this.noUtilisateur = noUtilisateur;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -31,10 +32,10 @@ public class Utilisateurs extends Authentification {
 		this.administrateur = administrateur;
 	}
 	
-	public Utilisateurs(String pseudo, String motDePasse, String nom, String prenom,
-			String email, String telephone, String rue, String codePostal, String ville, boolean administrateur) {
-		super(pseudo, motDePasse);
-		this.noUtilisateur = noUtilisateur;
+	public Utilisateurs(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, boolean administrateur) {
+		this.motDePasse = motDePasse;
+		this.pseudo = pseudo;
+		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -52,6 +53,14 @@ public class Utilisateurs extends Authentification {
 
 	public void setNoUtilisateur(Integer noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
+	}
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
 	}
 
 	public String getNom() {
@@ -118,11 +127,13 @@ public class Utilisateurs extends Authentification {
 		this.administrateur = administrateur;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "Utilisateurs [noUtilisateur=" + noUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", email="
-				+ email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal=" + codePostal + ", ville="
-				+ ville + ", administrateur=" + administrateur + "]";
+		return "Utilisateurs [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", administrateur=" + administrateur + "]";
 	}
 
 	@Override

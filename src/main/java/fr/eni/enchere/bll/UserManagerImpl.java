@@ -4,9 +4,13 @@ import fr.eni.enchere.bo.Utilisateurs;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.UserDAOJdbcImpl;
 
-public class UserManager implements IUserManager{
-
+public class UserManagerImpl implements IUserManager{
 	
+	
+	
+	public UserManagerImpl() {}
+
+
 	public Utilisateurs selectByID(int id) {
 		UserDAOJdbcImpl userDAO = DAOFactory.getUserDAO();
 		return userDAO.selectByID(id);

@@ -32,8 +32,9 @@ public class ServletTestUserDAOJdbcImpl extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			
-			Utilisateurs userTest = new Utilisateurs( "test", "test", "test", "test", "test", "test", "test", "test", "test", (byte) 1);
+			Utilisateurs userTest = new Utilisateurs( "Koff", "Jean", "Benoit", "jean.benoit@gmail.com", "0615254895", "27 rue de la ritournelle", "37051", "Champigny-sur-Veude", "motDePasse", false);
 			UserDAOJdbcImpl userDAOJdbcImpl = new UserDAOJdbcImpl();
+			System.out.println(userTest.toString());
 			userDAOJdbcImpl.insert(userTest);
 			response.getWriter().append("Insertion de l'user dont l'id est : ").append(userTest.getNoUtilisateur()+"");
 			response.getWriter().append("Test : ").append(userDAOJdbcImpl.selectByID(9).toString()+"");
