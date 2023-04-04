@@ -38,7 +38,7 @@ public class ServletTestEnchereDAOJdbcImpl extends HttpServlet {
 		try {
 			Boolean admin = true;
 			Encheres testBid = new Encheres(LocalDate.of(2012,12,12),12,12121212);
-			Utilisateurs user = new Utilisateurs(1,"kebab","simply","thebest","simplythebest@thegoat.com","6969696969","legends avenue","00001","Rochefourchat","saladetomateoignon",admin);
+			Utilisateurs user = new Utilisateurs(1,"Heisenberg","White","Walter","SayMyName@thegoat.meth","708-764-6288","308 Negra Arroyo Lane","87104","Albuquerque","WalterJr",admin);
 			Categories cat = new Categories(1,"peluche");
 			testBid.setArticle(new Articles (1, "nom", "prenom ", LocalDate.of(2012,12,12), LocalDate.of(2012,12,12), 1,1,user, cat));
 			
