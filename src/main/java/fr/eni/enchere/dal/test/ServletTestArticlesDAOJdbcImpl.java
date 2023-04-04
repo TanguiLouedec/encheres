@@ -64,19 +64,13 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 			articlesDAO.insert(articleTest);
 			
 			
-			ArrayList<Articles> articleList = new ArrayList<Articles>();
-
-			articleList = articlesDAO.selectAll();
-			
-			for (Articles articles : articleList) {
-				System.out.println(articles);
-			}
+		
 			//Test Select All
-//			ArticlesDAOJdbcImpl articlesDAO1 = new ArticlesDAOJdbcImpl();
-//			List<Articles> articlesList = articlesDAO1.selectAll();
+			ArticlesDAOJdbcImpl articlesDAO1 = new ArticlesDAOJdbcImpl();
+			List<Articles> articlesList = articlesDAO1.selectAll();
 //
-//			for (Articles article : articlesList) {
-//			    response.getWriter().append(article.toString() + "\n");}
+			for (Articles article : articlesList) {
+			    response.getWriter().append(article.toString() + "\n");}
 		} catch (Exception e) {
 			// TODO: handle exception
 			response.getWriter().append("Fail");
