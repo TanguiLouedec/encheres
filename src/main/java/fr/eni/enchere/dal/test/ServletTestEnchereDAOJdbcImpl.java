@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bo.Articles;
+import fr.eni.enchere.bo.Categories;
 import fr.eni.enchere.bo.Encheres;
 import fr.eni.enchere.bo.Utilisateurs;
 import fr.eni.enchere.dal.EncheresDAOJdbcImpl;
@@ -35,12 +36,13 @@ public class ServletTestEnchereDAOJdbcImpl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			
+			Boolean admin = true;
 			Encheres testBid = new Encheres(LocalDate.of(2012,12,12),12,12121212);
-
-			testBid.setArticle(new Articles (1, "nom", "prenom ", LocalDate.of(2012,12,12), LocalDate.of(2012,12,12), 1,1,1, 1));
-			Byte bit = 1 ;
-			testBid.setUtilisateurs(new Utilisateurs (1, "test", "test","test","test","test","test","test","test","test", bit));
+			Utilisateurs user = new Utilisateurs(1,"kebab","simply","thebest","simplythebest@thegoat.com","6969696969","legends avenue","00001","Rochefourchat","saladetomateoignon",admin);
+			Categories cat = new Categories(1,"peluche");
+			testBid.setArticle(new Articles (1, "nom", "prenom ", LocalDate.of(2012,12,12), LocalDate.of(2012,12,12), 1,1,user, cat));
+			
+			testBid.setUtilisateurs(new Utilisateurs (1, "test", "test","test","test","test","test","test","test","test", admin));
 			
 			EncheresDAOJdbcImpl EncheresDAOJdbcImpl = new EncheresDAOJdbcImpl();
 
