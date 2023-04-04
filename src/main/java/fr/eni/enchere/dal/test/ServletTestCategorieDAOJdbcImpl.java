@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.test;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Categories;
+import fr.eni.enchere.dal.CategoriesDAOJdbcImpl;
 
 /**
  * Servlet implementation class ServletTestCategorieDAOJdbcImpl

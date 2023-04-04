@@ -75,6 +75,9 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 				Integer noCategorie = rs.getInt(9);
 
 				// Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
+				
+
+				//Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
 				Utilisateurs utilisateur = new Utilisateurs();
 				utilisateur.setNoUtilisateur(noUtilisateur);
 
