@@ -1,11 +1,16 @@
 package fr.eni.enchere.serlvets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.enchere.bll.ArticleManagerSingleton;
+import fr.eni.enchere.bo.Articles;
 
 /**
  * Servlet implementation class IndexServlet
@@ -27,7 +32,19 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ArrayList<Articles> articleList = new ArrayList<Articles>();
+		articleList = null;
 		
+		try {
+			articleList = ArticleManagerSingleton.getInstance().selectAll();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		request.setAttribute("articleList", articleList);
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+
 	}
 
 	/**
