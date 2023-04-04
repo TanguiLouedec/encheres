@@ -40,7 +40,7 @@ public class ServletTestCategorieDAOJdbcImpl extends HttpServlet {
 			boolean admin = true;
 			Categories testCategories = new Categories("drogue");
 			testCategories.setNoCategorie(1);
-			Utilisateurs user = new Utilisateurs(1,"kebab","simply","thebest","simplythebest@thegoat.com","6969696969","legends avenue","00001","Rochefourchat","saladetomateoignon",admin);
+			Utilisateurs user = new Utilisateurs(1,"Heisenberg","White","Walter","SayMyName@thegoat.meth","708-764-6288","308 Negra Arroyo Lane","87104","Albuquerque","WalterJr",admin);
 			testCategories.setArticle(new Articles(1, "methamphetamine", "blue meth", LocalDate.of(2012, 12, 12),
 					LocalDate.of(2012, 12, 12), 1, 1,user, testCategories));
 
