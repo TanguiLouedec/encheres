@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.enchere.bll.UserManagerSingleton;
 import fr.eni.enchere.bo.Utilisateurs;
 import fr.eni.enchere.dal.UserDAOJdbcImpl;
 
@@ -38,6 +39,8 @@ public class ServletTestUserDAOJdbcImpl extends HttpServlet {
 			userDAOJdbcImpl.insert(userTest);
 			response.getWriter().append("Insertion de l'user dont l'id est : ").append(userTest.getNoUtilisateur()+"");
 			response.getWriter().append("Test : ").append(userDAOJdbcImpl.selectByID(9).toString()+"");
+			
+			UserManagerSingleton.getInstance().delete(10);
 
 		} catch (Exception e) {
 			// TODO: handle exception

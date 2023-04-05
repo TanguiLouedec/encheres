@@ -8,4 +8,8 @@ public class DAOFactory {
 	public static ArticlesDAOJdbcImpl getArticleDAO() {
 		return new ArticlesDAOJdbcImpl();
 	}
+	
+	public static CategoriesDAOJdbcImpl getCatDAO() {
+		return new CategoriesDAOJdbcImpl();
+	}
 }

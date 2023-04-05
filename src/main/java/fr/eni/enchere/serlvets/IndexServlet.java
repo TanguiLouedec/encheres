@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bll.ArticleManagerSingleton;
+import fr.eni.enchere.bll.UserManagerSingleton;
 import fr.eni.enchere.bo.Articles;
 
 /**
@@ -33,15 +34,27 @@ public class IndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<Articles> articleList = new ArrayList<Articles>();
+		ArrayList<String> sellerUsernames = new ArrayList<String>();
 		articleList = null;
-		
+		sellerUsernames = null;
 		try {
 			articleList = ArticleManagerSingleton.getInstance().selectAll();
-			for (Articles articles : articleList) {
-				System.out.println(articles);
-			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+		
+		System.out.println("test");
+		/*for (Articles articles : articleList) {
+			sellerUsernames.add(UserManagerSingleton.getInstance().selectByID(articles.getUtilisateur().getNoUtilisateur()).getPseudo());
+		}
+		System.out.println("test2");
+		for (String string : sellerUsernames) {
+			System.out.println(string);
+		}*/
+		
+		for (Articles article: articleList) {
+			System.out.println(article.toString());
 		}
 		
 		request.setAttribute("articleList", articleList);

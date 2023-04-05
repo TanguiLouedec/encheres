@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.enchere.bll.UserManagerSingleton;
 import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Categories;
 import fr.eni.enchere.bo.Utilisateurs;
@@ -31,7 +32,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement psmt = con.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
-
+			System.out.println("con ok");
 			psmt.setString(1, article.getNomArticle());
 			psmt.setString(2, article.getDescription());
 			psmt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
@@ -41,7 +42,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 			psmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
 			psmt.setInt(8, article.getCategorie().getNoCategorie());
 			psmt.executeUpdate();
-
+			System.out.println("updateok");
 			// Recuperer l'index auto généré par la base de données pour hydrater l'objet
 			ResultSet rs = psmt.getGeneratedKeys();
 
@@ -56,6 +57,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 	}
 
 	public Articles selectByID(int id) {
+		Articles article=null;
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement(SELECT_BY_ID);
 			pstmt.setInt(1, id);
@@ -84,28 +86,27 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 				Categories categorie = new Categories();
 				categorie.setNoCategorie(noCategorie);
 
-				Articles article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
+				article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
 						prixInitial, prixVente, utilisateur, categorie);
 
-				return article;
-			} else {
-				return null;
+			
 			}
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
+		}return article;
 
 	}
 
 	@Override
 	public ArrayList<Articles> selectAll() {
+		ArrayList<Articles> articlesList = null;
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement(SELECT_ALL);
 
 			ResultSet rs = pstmt.executeQuery();
 
-			List<Articles> articlesList = new ArrayList<>();
+	
 
 			while (rs.next()) {
 				Integer noArticle = rs.getInt(1);
@@ -120,19 +121,24 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 				Integer noCategorie = rs.getInt(9);
 
 				Utilisateurs utilisateur = new Utilisateurs();
-				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur = UserManagerSingleton.getInstance().selectByID(noUtilisateur);
 
 				Categories categorie = new Categories();
 				categorie.setNoCategorie(noCategorie);
 
 				Articles article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
 						prixInitial, prixVente, utilisateur, categorie);
+				
+				if (articlesList== null) {
+					articlesList= new ArrayList<Articles>();
+				}
+				
 				articlesList.add(article);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return null;
+		return articlesList;
 	}
 
 }
