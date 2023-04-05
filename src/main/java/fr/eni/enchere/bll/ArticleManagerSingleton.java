@@ -6,6 +6,7 @@ public class ArticleManagerSingleton {
 	public static ArticleManagerImpl getInstance() {
 		if (instance == null) {
 			instance = new ArticleManagerImpl();
+			System.out.println("singleton ok");
 		}
 		return instance;
 	}
