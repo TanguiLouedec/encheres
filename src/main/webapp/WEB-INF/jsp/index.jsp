@@ -35,12 +35,26 @@
 		<a href="">
 			<button>Deconnexion</button>
 		</a>
+		
+		<select name="Categories" id="catMenu">
+	
+		    <option value="">--Please choose a categorie--</option>
+		    <option value="all">Toutes</option>
+	    	
+			<c:forEach items="${catList}" var="cat">
+				<option value="test">${cat.libelle}</option>
+			</c:forEach>
+		
+		</select>
 	</header>
+	
+
+		
 	<div>
 		<article class="container">
 			<c:forEach items="${articleList}" var="item">
 				<article class="card">
-					<h4>${item.nomArticle}</h4>
+					<a href="">${item.nomArticle}</a><br>
 					${item.description}<br> Début d'enchère :
 					${item.dateDebutEncheres}<br> Fin d'enchère :
 					${item.dateFinEncheres}<br> ${item.prixInitial}€<br>

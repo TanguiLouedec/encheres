@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bll.ArticleManagerSingleton;
+import fr.eni.enchere.bll.CatManagerSingleton;
 import fr.eni.enchere.bll.UserManagerSingleton;
 import fr.eni.enchere.bo.Articles;
+import fr.eni.enchere.bo.Categories;
 
 /**
  * Servlet implementation class IndexServlet
@@ -34,11 +36,12 @@ public class IndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<Articles> articleList = new ArrayList<Articles>();
-		ArrayList<String> sellerUsernames = new ArrayList<String>();
 		articleList = null;
-		sellerUsernames = null;
+		ArrayList<Categories> catList = new ArrayList<Categories>();
+		catList = null;
 		try {
 			articleList = ArticleManagerSingleton.getInstance().selectAll();
+			catList = CatManagerSingleton.getInstance().selectAll();
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -57,6 +60,11 @@ public class IndexServlet extends HttpServlet {
 			System.out.println(article.toString());
 		}
 		
+		for (Categories categories : catList) {
+			System.out.println(categories);
+		}
+		
+		request.setAttribute("catList", catList);
 		request.setAttribute("articleList", articleList);
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
