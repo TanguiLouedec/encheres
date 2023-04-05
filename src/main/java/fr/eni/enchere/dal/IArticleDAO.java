@@ -9,4 +9,5 @@ public interface IArticleDAO {
 	public List<Articles> selectAll();
 	public Articles selectByID(int id);
 	public void insert(Articles article);
+	public void delete(int id);
 }

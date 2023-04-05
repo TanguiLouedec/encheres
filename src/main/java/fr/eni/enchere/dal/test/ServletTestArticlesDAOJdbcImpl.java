@@ -39,7 +39,7 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 
-			//Test insertion Article
+			// Test insertion Article
 
 			Boolean bit = true;
 			Utilisateurs user = new Utilisateurs(1, "test", "test", "test", "test", "test", "test", "test", "test",
@@ -51,27 +51,48 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
 			articlesDAO.insert(articleTest);
 
-			
 			// Test Select All
-			
+
 			ArticlesDAOJdbcImpl articlesDAOListe = new ArticlesDAOJdbcImpl();
 			List<Articles> liste = articlesDAOListe.selectAll();
 
 			for (Articles article : liste) {
-			    response.getWriter().append(article.toString() + "\n");}
-			
+				response.getWriter().append(article.toString() + "\n");
+			}
+
 			// Test Select ByID
+
+//			Articles selectedArticle = articleTest.selectByID(articleTest.getNoArticle());
+//			System.out.println("Article :");
+//			System.out.println(selectedArticle.toString());
+//
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			response.getWriter().append("Fail");
+//			e.printStackTrace();
+//		}
+
+
+			// Test Delete
+//			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
+//			int idArticleASupprimer = 1790; // insérer l'ID de l'article à supprimer
+//			articlesDAO.delete(idArticleASupprimer);
 			
-//	        Articles selectedArticle = articleDAO.selectByID(article.getNoArticle());
-//	        System.out.println("Selected article:");
-//	        System.out.println(selectedArticle.toString());
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			response.getWriter().append("Fail");
-			e.printStackTrace();
-		}
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	        // PENSER A VERIFIER QUE L'ID DE LA LISTE EXISTE DANS VOTRE BASE, SINON LA SUPPRESSION N'AURA AUCUN EFFET
+	        Integer idArticleASupprimer = 1780;
+	        ListeCourseManager manager = new ListeCourseManager();
+	        try {
+	            manager.supprimerListeCourse(idListeASupprimer);
+	        } catch (BusinessException e) {
+	            e.printStackTrace();
+	            // LORSQUE LA BUSINESSEXPCETION SURVIENT, ON DUMP LES CODES ERREURS DANS LA CONSOLE, POUR MIEUX COMPRENDRE D'OU VIENT L'ERREUR
+	            for(Integer code : e.getListeCodesErreur()) {
+	                System.err.println("Code erreur rencontré au niveau BLL/DAL : " + code);
+	            }
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	        }
+	        response.getWriter().append("Servlet Test Suppresion ListeCourse");
 
 	}
 
