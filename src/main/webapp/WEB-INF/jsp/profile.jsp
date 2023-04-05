@@ -11,6 +11,9 @@
 	<div class="container">
 		<div class = "card container article">
 			<div class="container">
+				<a href="./IndexServlet">
+					<button>Home</button>
+				</a> 
 				<h4>Mon profil</h4>
 				<a>
 					<button>Modifier</button>
@@ -25,6 +28,10 @@
 			<p>Adresse : ${user.rue}</p>
 			<p>Code postal : ${user.codePostal}</p>
 			<p>Ville : ${user.ville}</p>
+			
+			<a href="./IndexServlet">
+				<button onchange="">Delete my account</button>
+			</a> 
 		</div>
 	</div>
 </body>

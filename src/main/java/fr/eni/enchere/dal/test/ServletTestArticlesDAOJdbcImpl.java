@@ -2,6 +2,7 @@ package fr.eni.enchere.dal.test;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -41,16 +42,25 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 
 			// Test insertion Article
 
-			Boolean bit = true;
-			Utilisateurs user = new Utilisateurs(1, "test", "test", "test", "test", "test", "test", "test", "test",
-					"test", bit);
+			Utilisateurs user = new Utilisateurs(14, "test", "test", "test", "test", "test", "test", "test", "test", "test", false);
 			Categories cat = new Categories(2, "test");
 
 			Articles articleTest = new Articles(1, "test1", "test", LocalDate.of(2023, 03, 31),
 					LocalDate.of(2023, 04, 30), 3, 3, user, cat);
 			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
 			articlesDAO.insert(articleTest);
+<<<<<<< HEAD
 
+=======
+			
+		
+			//Test Select All
+			ArticlesDAOJdbcImpl articlesDAO1 = new ArticlesDAOJdbcImpl();
+			List<Articles> articlesList = articlesDAO1.selectAll();
+//
+			for (Articles article : articlesList) {
+			    response.getWriter().append(article.toString() + "\n");}
+>>>>>>> branch 'master' of https://github.com/TanguiLouedec/encheres.git
 			// Test Select All
 
 			ArticlesDAOJdbcImpl articlesDAOListe = new ArticlesDAOJdbcImpl();

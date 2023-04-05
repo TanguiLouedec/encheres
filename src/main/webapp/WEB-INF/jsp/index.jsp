@@ -1,36 +1,54 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@page import="fr.eni.enchere.bo.Articles"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+<meta charset="UTF-8">
 
-	<title>Enchere</title>
+<link rel="stylesheet"
+	href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+
+<title>Enchere</title>
 </head>
 <body>
-	<a href="./profile.jsp">
-		<button>
-			Profil
-		</button>
-	</a>
-	
+
+	<header class="card container">
+		<a href="./RegisterServlet">
+			<button>S'inscrire</button>
+		</a> 
+		<a href="./ConnectionServlet">
+			<button>Se connecter</button>
+		</a>
+		<a href="./ProfileServlet">
+			<button>Profil</button>
+		</a>
+		<a href="">
+			<button>
+				Vendre un article
+			</button>
+		</a>
+		<a href="">
+			<button>Deconnexion</button>
+		</a>
+	</header>
 	<div>
-		<ul>
+		<article class="container">
 			<c:forEach items="${articleList}" var="item">
-			    ${item.nomArticle}<br>
-			    ${item.description}<br>
-   			    ${item.dateDebutEncheres}<br>
-			    ${item.dateFinEncheres}<br>
-			    ${item.prixInitial}<br>
-			    ${item.utilisateur.nom}<br>
-			    ${item.categorie.libelle}<br>	
+				<article class="card">
+					<h4>${item.nomArticle}</h4>
+					${item.description}<br> Début d'enchère :
+					${item.dateDebutEncheres}<br> Fin d'enchère :
+					${item.dateFinEncheres}<br> ${item.prixInitial}€<br>
+					Vendeur : ${item.utilisateur.pseudo}<br>
+					${item.categorie.libelle}<br>
+				</article>
 			</c:forEach>
-		</ul>
+		</article>
 	</div>
 
 </body>

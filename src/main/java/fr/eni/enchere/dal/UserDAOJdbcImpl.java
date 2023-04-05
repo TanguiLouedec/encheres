@@ -11,7 +11,8 @@ import fr.eni.enchere.dal.tools.ConnectionProvider;
 public class UserDAOJdbcImpl implements IUserDAO{
 	    protected final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur FROM utilisateurs WHERE no_utilisateur = ?";
 	    protected final String INSERT = "INSERT INTO utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?)";
-	    
+	    protected final String DELETE = " DELETE FROM `utilisateurs` WHERE `utilisateurs`.`no_utilisateur` = ?";
+
 	    public Utilisateurs selectByID(int id) {
 	        try (Connection con = ConnectionProvider.getConnection()){
 	            PreparedStatement psmt = con.prepareStatement(SELECT_BY_ID);
@@ -73,4 +74,17 @@ public class UserDAOJdbcImpl implements IUserDAO{
 	            throw new RuntimeException(e);
 	        }
 	    }
+
+		public void delete(int id) {
+			try (Connection con = ConnectionProvider.getConnection()){
+				
+	            PreparedStatement psmt = con.prepareStatement(DELETE);
+	            psmt.setInt(1, id);
+	            	            
+	            psmt.executeUpdate();	       
+	            
+	        } catch (SQLException e) {
+	            throw new RuntimeException(e);
+	        }
+		}
 }

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.enchere.bll.UserManagerSingleton;
 import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Categories;
 import fr.eni.enchere.bo.Utilisateurs;
@@ -93,8 +94,8 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 	}
 
 	@Override
-	public List<Articles> selectAll() {
-		List<Articles> articlesList = null;
+	public ArrayList<Articles> selectAll() {
+		ArrayList<Articles> articlesList = null;
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement(SELECT_ALL);
 
@@ -114,7 +115,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 
 				// Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
 				Utilisateurs utilisateur = new Utilisateurs();
-				utilisateur.setNoUtilisateur(noUtilisateur);
+				utilisateur = UserManagerSingleton.getInstance().selectByID(noUtilisateur);
 
 				// Debut de jointure. Le "Categories" n'est pas reconnu.
 				Categories categorie = new Categories();

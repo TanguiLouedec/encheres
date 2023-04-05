@@ -18,8 +18,19 @@ public class UserManagerImpl implements IUserManager{
 
 	
 	public void insert(Utilisateurs user) {
+		try {
+			UserDAOJdbcImpl userDAO = DAOFactory.getUserDAO();
+			userDAO.insert(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+
+	@Override
+	public void delete(int id) {
 		UserDAOJdbcImpl userDAO = DAOFactory.getUserDAO();
-		userDAO.insert(user);
+		userDAO.delete(id);
 	}
 
 }
