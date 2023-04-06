@@ -2,11 +2,12 @@ package fr.eni.enchere.dal;
 
 public class DAOFactory {
 	public static UserDAOJdbcImpl getUserDAO() {
+		System.out.println("factory ok");
 		return new UserDAOJdbcImpl();
 	}
 	
 	public static ArticlesDAOJdbcImpl getArticleDAO() {
-		System.out.println("factory ok");
+		//System.out.println("factory ok");
 		return new ArticlesDAOJdbcImpl();
 	}
 	

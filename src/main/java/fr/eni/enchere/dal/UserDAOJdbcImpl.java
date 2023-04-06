@@ -79,14 +79,16 @@ public class UserDAOJdbcImpl implements IUserDAO{
 	    }
 	    
 	    public ArrayList<Utilisateurs> selectAll(){
+	    	System.out.println("dao ok");
 	    	try (Connection con = ConnectionProvider.getConnection()){
 	            PreparedStatement psmt = con.prepareStatement(SELECT_ALL);
-	            	            
+	            System.out.println("dao connection ok");
 	            ResultSet rs = psmt.executeQuery();
-	            
+	            System.out.println("query ok");
 	            ArrayList<Utilisateurs> allUsers = new ArrayList<Utilisateurs>();
 	            
 	            while (rs.next()) {
+	            	System.out.println("rs ok");
 	            	Integer no_utilisateur = rs.getInt(1);
 	            	String pseudo = rs.getString(2);
 	            	String nom = rs.getString(3);
