@@ -40,7 +40,11 @@ public class IndexServlet extends HttpServlet {
 		ArrayList<Categories> catList = new ArrayList<Categories>();
 		catList = null;
 		try {
+			
+			System.out.println("test1");
 			articleList = ArticleManagerSingleton.getInstance().selectAll();
+
+			
 			catList = CatManagerSingleton.getInstance().selectAll();
 
 		} catch (Exception e) {

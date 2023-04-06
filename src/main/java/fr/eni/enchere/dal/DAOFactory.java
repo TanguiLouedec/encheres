@@ -6,6 +6,7 @@ public class DAOFactory {
 	}
 	
 	public static ArticlesDAOJdbcImpl getArticleDAO() {
+		System.out.println("factory ok");
 		return new ArticlesDAOJdbcImpl();
 	}
 	

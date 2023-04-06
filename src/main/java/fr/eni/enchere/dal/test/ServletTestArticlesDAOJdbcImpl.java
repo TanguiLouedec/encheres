@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.enchere.bll.ArticleManagerSingleton;
 import fr.eni.enchere.bo.Articles;
 import fr.eni.enchere.bo.Categories;
 import fr.eni.enchere.bo.Utilisateurs;
@@ -37,46 +38,71 @@ public class ServletTestArticlesDAOJdbcImpl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		// Test insertion Article
 		try {
 
-			//Test insertion Article
-
-			Utilisateurs user = new Utilisateurs(14, "test", "test", "test", "test", "test", "test", "test", "test", "test", false);
+			Utilisateurs user = new Utilisateurs(1, "test", "test", "test", "test", "test", "test", "test", "test",
+					"test", false);
 			Categories cat = new Categories(2, "test");
 
 			Articles articleTest = new Articles(1, "test1", "test", LocalDate.of(2023, 03, 31),
 					LocalDate.of(2023, 04, 30), 3, 3, user, cat);
-			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
-			articlesDAO.insert(articleTest);
 			
-		
-			//Test Select All
+			ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
+			
+			articlesDAO.insert(articleTest);
+		} catch (Exception e) {
+			response.getWriter().append("Fail Insertion");
+			e.printStackTrace();
+		}
+
+		// Test Select All
+		try {
 			ArticlesDAOJdbcImpl articlesDAO1 = new ArticlesDAOJdbcImpl();
 			List<Articles> articlesList = articlesDAO1.selectAll();
-//
+
 			for (Articles article : articlesList) {
-			    response.getWriter().append(article.toString() + "\n");}
-			// Test Select All
-			
+				response.getWriter().append(article.toString() + "\n");
+			}
+
 			ArticlesDAOJdbcImpl articlesDAOListe = new ArticlesDAOJdbcImpl();
 			List<Articles> liste = articlesDAOListe.selectAll();
 
 			for (Articles article : liste) {
-			    response.getWriter().append(article.toString() + "\n");}
-			
-			// Test Select ByID
-			
-//	        Articles selectedArticle = articleDAO.selectByID(article.getNoArticle());
-//	        System.out.println("Selected article:");
-//	        System.out.println(selectedArticle.toString());
-			
+				response.getWriter().append(article.toString() + "\n");
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
-			response.getWriter().append("Fail");
+			response.getWriter().append("Fail Select All");
 			e.printStackTrace();
 		}
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		// Test Select ByID
+
+		try {
+			Articles selectedArticle = ArticleManagerSingleton.getInstance().selectByID(1823);
+			System.out.println("Article :");
+			System.out.println(selectedArticle.toString());
+
+		} catch (Exception e) {
+			response.getWriter().append("Fail SelectByID");
+			e.printStackTrace();
+		}
+
+		// Test Delete
+		ArticlesDAOJdbcImpl articlesDAO = new ArticlesDAOJdbcImpl();
+
+		// insérer l'id de l'article a supprimer
+
+		int idArticleASupprimer = 1816;
+		try {
+			articlesDAO.delete(idArticleASupprimer);
+
+		} catch (Exception e) {
+			response.getWriter().append("Fail Delete");
+			e.printStackTrace();
+
+		}
 
 	}
 

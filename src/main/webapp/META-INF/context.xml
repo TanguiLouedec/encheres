@@ -7,6 +7,7 @@
 	
 		url="jdbc:mysql://localhost:3306/encheres"
 		username="root"
+		password="root"
 
 		maxTotal="20"
 		maxIdle="10"

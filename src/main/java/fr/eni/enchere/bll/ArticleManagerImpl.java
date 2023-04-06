@@ -14,6 +14,7 @@ public class ArticleManagerImpl implements IArticleManager{
 	@Override
 	public ArrayList<Articles> selectAll() {
 		ArticlesDAOJdbcImpl articleDAO = DAOFactory.getArticleDAO();
+		System.out.println("Manager ok");
 		return articleDAO.selectAll();
 	}
 

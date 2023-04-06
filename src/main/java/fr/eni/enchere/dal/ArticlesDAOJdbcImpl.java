@@ -18,21 +18,16 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 
 	protected final String INSERT_ARTICLE = "insert into articles_vendus(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) values(?,?,?,?,?,?,?,?)";
 	protected final String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM articles_vendus";
-	// protected final String SELECT_BY_ID = "SELECT no_article, nom_article,
-	// description, date_debut_encheres, date_fin_encheres, prix_initial,
-	// prix_vente, no_utilisateur, no_categorie FROM articles_vendus WHERE
-	// no_articles = ?";
-	protected final String SELECT_BY_ID = "SELECT" + "a.no_article," + "a.nom_article," + "a.description,"
-			+ "a.date_debut_encheres," + "a.date_fin_encheres," + "a.prix_initial" + "a.prix_vente,"
-			+ "u.no_utilisateur," + "c.no_categorie" + "FROM" + "articles_vendus a "
-			+ "JOIN utilisateurs u ON a.no_utilisateur = u.no_utilisateur "
-			+ "JOIN categories c ON a.no_categorie = c.no_categorie ";
+	protected final String SELECT_BY_ID = "SELECT a.no_article,a.nom_article, a.description,a.date_debut_encheres,a.date_fin_encheres,a.prix_initial,a.prix_vente,u.no_utilisateur,c.no_categorie FROM articles_vendus a JOIN utilisateurs u ON a.no_utilisateur = u.no_utilisateur JOIN categories c ON a.no_categorie = c.no_categorie where no_article=?";
+	protected final String DELETE_ARTICLE = "DELETE FROM articles_vendus WHERE no_article = ?";
 
+	// Insert
+	@Override
 	public void insert(Articles article) {
 
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement psmt = con.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
-			System.out.println("con ok");
+
 			psmt.setString(1, article.getNomArticle());
 			psmt.setString(2, article.getDescription());
 			psmt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
@@ -42,7 +37,7 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 			psmt.setInt(7, article.getUtilisateur().getNoUtilisateur());
 			psmt.setInt(8, article.getCategorie().getNoCategorie());
 			psmt.executeUpdate();
-			System.out.println("updateok");
+
 			// Recuperer l'index auto généré par la base de données pour hydrater l'objet
 			ResultSet rs = psmt.getGeneratedKeys();
 
@@ -56,8 +51,10 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 		}
 	}
 
+	// selectByID
+	@Override
 	public Articles selectByID(int id) {
-		Articles article=null;
+		Articles article = null;
 		try (Connection con = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement(SELECT_BY_ID);
 			pstmt.setInt(1, id);
@@ -76,28 +73,27 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 				Integer noUtilisateur = rs.getInt(8);
 				Integer noCategorie = rs.getInt(9);
 
-				// Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
-				
-
-				//Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
+				// Jointure. Le "Utilisateurs" n'est pas reconnu.
 				Utilisateurs utilisateur = new Utilisateurs();
 				utilisateur.setNoUtilisateur(noUtilisateur);
 
+				// Jointure Le "Categories" n'est pas reconnu
 				Categories categorie = new Categories();
 				categorie.setNoCategorie(noCategorie);
 
 				article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
 						prixInitial, prixVente, utilisateur, categorie);
 
-			
 			}
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}return article;
+		}
+		return article;
 
 	}
 
+	// selectAll
 	@Override
 	public ArrayList<Articles> selectAll() {
 		ArrayList<Articles> articlesList = null;
@@ -106,9 +102,8 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 
 			ResultSet rs = pstmt.executeQuery();
 
-	
-
 			while (rs.next()) {
+				System.out.println("dao ok");
 				Integer noArticle = rs.getInt(1);
 				String nomArticle = rs.getString(2);
 				String description = rs.getString(3);
@@ -120,19 +115,21 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 				Integer noUtilisateur = rs.getInt(8);
 				Integer noCategorie = rs.getInt(9);
 
+				// Debut de jointure. Le "Utilisateurs" n'est pas reconnu.
 				Utilisateurs utilisateur = new Utilisateurs();
 				utilisateur = UserManagerSingleton.getInstance().selectByID(noUtilisateur);
 
+				// Debut de jointure. Le "Categories" n'est pas reconnu.
 				Categories categorie = new Categories();
 				categorie.setNoCategorie(noCategorie);
 
 				Articles article = new Articles(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres,
 						prixInitial, prixVente, utilisateur, categorie);
-				
-				if (articlesList== null) {
-					articlesList= new ArrayList<Articles>();
+
+				if (articlesList == null) {
+					articlesList = new ArrayList<Articles>();
 				}
-				
+
 				articlesList.add(article);
 			}
 		} catch (SQLException e) {
@@ -141,4 +138,24 @@ public class ArticlesDAOJdbcImpl implements IArticleDAO {
 		return articlesList;
 	}
 
+	// suppression d'article
+	@Override
+	public void delete(int id) {
+
+		try (Connection connection = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pstmt = connection.prepareStatement(DELETE_ARTICLE);
+			{
+
+				pstmt.setInt(1, id);
+
+				pstmt.executeUpdate();
+
+			}
+		} catch (SQLException e) {
+
+			throw new RuntimeException(e);
+		}
+
+	}
 }
