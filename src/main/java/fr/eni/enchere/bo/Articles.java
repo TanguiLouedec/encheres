@@ -34,6 +34,20 @@ public class Articles {
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 	}
+	
+	public Articles(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer prixInitial, Integer prixVente, Utilisateurs utilisateur,
+			Categories categorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
 
 
 

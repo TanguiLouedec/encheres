@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
 		
 		<meta charset="UTF-8">
-		<title>Register</title>
+		<title>Sign up</title>
 	</head>
 	<body>
 		<div class="container">
@@ -17,13 +17,13 @@
 			
 	        <form method="post" action="./RegisterServlet">    
 	            <label for="pseudo">Pseudo : (3-16 caractères)</label>
-	            <input type="text" name="pseudo" id="pseudo" pattern="^\w{3,16}$">
+	            <input type="text" name="pseudo" id="pseudo">
 	
 	            <label for="nom">Nom :</label>
-	            <input type="text" name="nom" id="nom" pattern="^\w{2,}$">
+	            <input type="text" name="nom" id="nom"">
 	
 	            <label for="prenom">Prenom :</label>
-	            <input type="text" name="prenom" id="prenom" pattern="^\w{2,}$">
+	            <input type="text" name="prenom" id="prenom"">
 	
 	            <label for="email">Email :</label>
 	            <input type="email" name="email" id="email">
@@ -32,7 +32,7 @@
 	            <input type="tel" name="telephone" id="telephone">
 	
 	            <label for="rue">Adresse :</label>
-	            <input type="text" name="rue" id="rue" pattern="^\w{2,}$">
+	            <input type="text" name="rue" id="rue">
 	
 	            <label for="cp">Code postal :</label>
 	            <input type="text" name="cp" id="cp">
@@ -46,7 +46,7 @@
 	            <label for="mdpConfirm">Confirmez le mot de passe :</label>
 	            <input type="password" name="mdpConfirm" id="mdpConfirm">
 	
-	            <input type="submit" value="S'inscrire" id="submit">
+	            <input type="submit" value="Sign up" id="submit">
 	        </form>    
 	    </div>
 	</body>

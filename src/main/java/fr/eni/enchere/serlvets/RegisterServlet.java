@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.enchere.bll.UserManagerSingleton;
 import fr.eni.enchere.bo.Utilisateurs;
 import fr.eni.enchere.dal.UserDAOJdbcImpl;
 
@@ -55,11 +56,11 @@ public class RegisterServlet extends HttpServlet {
 		String mdpConfirm = request.getParameter("mdpConfirm");
 		
 		Utilisateurs user = new Utilisateurs(pseudo, nom, prenom, email, telephone, rue, cp, ville, mdp, false);
+		UserManagerSingleton.getInstance().insert(user);
 		
-		UserDAOJdbcImpl daoImpl = new UserDAOJdbcImpl();
-		daoImpl.insert(user);
-		
-		//doGet(request, response);
+		request.getRequestDispatcher("./ConnectionServlet").forward(request, response);		
+		//response.sendRedirect("./IndexServlet");
+		doGet(request, response);
 	}
 
 }

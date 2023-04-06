@@ -17,35 +17,53 @@
 </head>
 <body>
 
-	<header class="card container">
-		<a href="./RegisterServlet">
-			<button>S'inscrire</button>
-		</a> 
-		<a href="./ConnectionServlet">
-			<button>Se connecter</button>
-		</a>
-		<a href="./ProfileServlet">
-			<button>Profil</button>
-		</a>
-		<a href="">
-			<button>
-				Vendre un article
-			</button>
-		</a>
-		<a href="">
-			<button>Deconnexion</button>
-		</a>
-		
-		<select name="Categories" id="catMenu">
 	
-		    <option value="">--Please choose a categorie--</option>
-		    <option value="all">Toutes</option>
-	    	
-			<c:forEach items="${catList}" var="cat">
-				<option value="test">${cat.libelle}</option>
-			</c:forEach>
+
+	<header class="card container">
 		
-		</select>
+		<h1>ENIbay</h1>
+
+				
+		<%  
+			//HttpSession session = request.getSession();
+			if(session.getAttribute("isConnected")==null) {
+				%>
+					<a href="./RegisterServlet">
+						<button>Sign up</button>
+					</a>
+					<a href="./ConnectionServlet">
+						<button>Login</button>
+					</a> 
+				<%
+			} else {
+				%>
+					<a href="./ProfileServlet">
+						<button>Profile</button>
+					</a>
+					<a href="">
+						<button>
+							Sell
+						</button>
+					</a>
+					<form action="./DisconnectServlet" method="post">
+						<input type="submit" value="Disconnect"></input>
+					</form>
+				<%
+			}
+		%>
+				
+		<form action="./IndexServlet" method="post">		
+			<select name="Categories" id="catMenu">
+			    <option value="all">All</option>
+			    
+		    	<c:forEach items="${catList}" var="item">
+					<option value=$item.noCategorie>${item.libelle}</option>
+				</c:forEach>
+			 
+			</select>
+			
+            <input type="submit" value="Search" id="search">		
+		</form>		
 	</header>
 	
 
